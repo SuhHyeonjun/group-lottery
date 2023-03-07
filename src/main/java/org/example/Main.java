@@ -1,7 +1,13 @@
 package org.example;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+
+// 스프링 스큐리티 로그인 페이지 제거 옵션
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SpringApplication.run(Main.class, args);
     }
 }
