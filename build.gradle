@@ -1,0 +1,45 @@
+// 이 프로젝트의 플러그인 의존성 관리를 위한 설정
+buildscript {
+    // build.gradle에서 사용하는 전역변수 설정
+    ext {
+        // springBootVersion 전역변수를 생성하고 그 값을 '2.1.9.RELEASE'
+        springBootVersion = '2.1.9.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        // spring-boot-gradle-plugin은 스프링 부트 gradle 플러그인의 '2.1.9.RELEASE'를 의존성으로 받는다.
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// 플러그인 추가 목록 (아래 4개의 플러그인은 자바와 스프링 부트를 사용하기 위한 필수 플러그인)
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' // 스프링 부트의 의존성 관리 플러그인
+
+group 'org.example'
+version '1.0.1-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss") // 자동으로 버전값 변경
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.projectlombok:lombok') // 롬복 의존성 추가
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')  // DATA-JPA 의존성 추가
+    implementation('com.h2database:h2') // 테스트용 데이터 베이스
+    implementation('org.springframework.boot:spring-boot-starter-mustache') // 머스테치 의존성 추가
+    implementation('org.springframework.boot:spring-boot-starter-oauth2-client') // 스프링 시큐리티 의존성
+    implementation('org.springframework.session:spring-session-jdbc') // 세션 저장소 db 사용 의존성
+    implementation('org.mariadb.jdbc:mariadb-java-client') // 마리아 DB 드라이버 등록
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test') // 스프링 시큐리티 테스트 의존성
+}
